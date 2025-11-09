@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-md-4">
         <div class="card">
-            <div class="card-body" *ngIf="studentsArray.length>0;else noStd">
+            <div class="card-body">
                 <h1>{{isInEditMode? "Update Student" :"Add Student"}}</h1>
                 <div class="form-group">
                     <label for="name">First Name</label>
@@ -24,19 +24,19 @@
                     <label for="contact">Contact</label>
                     <input type="text" class="form-control" #contact>
                 </div>
-                <button mat-stroked-button color="primary" *ngIf="!isInEditMode;else updateNdCancel" (click)="onStdAdd()">Add Student</button>
+                <button mat-stroked-button color="primary" *ngIf="!isInEditMode;else updateNdCancel"
+                    (click)="onStdAdd()">Add Student</button>
                 <ng-template #updateNdCancel>
-                    <button mat-stroked-button color="primary" *ngIf="isInEditMode" class="mr-3" (click)="onStdUpdate()">Update Student</button>
-                    <button mat-stroked-button color="primary" *ngIf="isInEditMode" (click)="onEditCancel()">Cancel Edit</button>
+                    <button mat-stroked-button color="primary" *ngIf="isInEditMode" class="mr-3"
+                        (click)="onStdUpdate()">Update Student</button>
+                    <button mat-stroked-button color="primary" *ngIf="isInEditMode" (click)="onEditCancel()">Cancel
+                        Edit</button>
                 </ng-template>
             </div>
-            <ng-template #noStd>
-                <p class="alert alert-info">No student added yet!!!</p>
-            </ng-template>
         </div>
     </div>
     <div class="col-md-8">
-        <div class="card">
+        <div class="card" *ngIf="studentsArray.length>0;else noStd">
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered">
@@ -59,11 +59,13 @@
                                 <td>{{std.email}}</td>
                                 <td>{{std.contact}}</td>
                                 <td><button mat-icon-button
-                                        aria-label="Example icon button with a vertical three dot icon" (click)="onStdEdit(std)"  color="primary">
+                                        aria-label="Example icon button with a vertical three dot icon"
+                                        (click)="onStdEdit(std)" color="primary">
                                         <mat-icon>edit</mat-icon>
                                     </button></td>
                                 <td><button mat-icon-button
-                                        aria-label="Example icon button with a vertical three dot icon" (click)="onStdRemove(std)" color="warn" [disabled]="std.stdId===Edit_Id">
+                                        aria-label="Example icon button with a vertical three dot icon"
+                                        (click)="onStdRemove(std)" color="warn" [disabled]="std.stdId===Edit_Id">
                                         <mat-icon>delete</mat-icon>
                                     </button></td>
                             </tr>
@@ -72,5 +74,9 @@
                 </div>
             </div>
         </div>
+        <ng-template #noStd>
+            <p class="alert alert-info">No student added yet!!!</p>
+        </ng-template>
+
     </div>
 </div>

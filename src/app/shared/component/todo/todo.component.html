@@ -9,32 +9,36 @@
                 <button mat-stroked-button color="primary" class="btn-block" (click)="onTodoAdd()"
                     *ngIf="!isInEditMode ;else updateNdCancel">Add Todo</button>
                 <ng-template #updateNdCancel>
-                    <button mat-stroked-button color="primary" class="btn-block" *ngIf="isInEditMode" (click)="onTodoUpdate()">Update Todo</button>
-                    <button mat-stroked-button color="primary" class="btn-block" *ngIf="isInEditMode" (click)="onEditCancel()">Cancel Edit</button>
+                    <button mat-stroked-button color="primary" class="btn-block" *ngIf="isInEditMode"
+                        (click)="onTodoUpdate()">Update Todo</button>
+                    <button mat-stroked-button color="primary" class="btn-block" *ngIf="isInEditMode"
+                        (click)="onEditCancel()">Cancel Edit</button>
                 </ng-template>
 
             </div>
         </div>
     </div>
     <div class="col-md-6">
-        <div class="card">
-            <div class="card-body" *ngIf="todosArr.length>0 else noTodo">
+        <div class="card" *ngIf="todosArr.length>0 else noTodo">
+            <div class="card-body">
                 <ul class="list-group">
                     <li class="list-group-item d-flex justify-content-between" *ngFor="let todo of todosArr">
                         <strong>{{todo.todoItem|titlecase}}</strong>
                         <div>
                             <button mat-raised-button color="primary" class="mr-3"
                                 (click)="onTodoEdit(todo)">Edit</button>
-                            <button mat-raised-button color="warn" (click)="onTodoRemove(todo)" [disabled]="todo.todoId===Edit_Id">Remove</button>
+                            <button mat-raised-button color="warn" (click)="onTodoRemove(todo)"
+                                [disabled]="todo.todoId===Edit_Id">Remove</button>
                         </div>
                     </li>
                 </ul>
             </div>
-            <ng-template #noTodo>
-                <p class="alert alert-info" >
-                    No todo added yet!!
-                </p>
-            </ng-template>
         </div>
+        <ng-template #noTodo>
+            <p class="alert alert-info">
+                No todo added yet!!
+            </p>
+        </ng-template>
+
     </div>
 </div>
